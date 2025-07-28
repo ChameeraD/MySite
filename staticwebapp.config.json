@@ -1,0 +1,8 @@
+{
+    "navigationFallback": {
+        "rewrite": "/index.html"
+    },
+    "logging": {
+        "connectionString": "InstrumentationKey=YOUR_INSTRUMENTATION_KEY_HERE"
+    }
+}
