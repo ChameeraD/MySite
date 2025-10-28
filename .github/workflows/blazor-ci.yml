@@ -53,7 +53,7 @@ jobs:
       with:
         client-id: ${{ secrets.AZURE_CLIENT_ID }}
         tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-        allow-no-subscription: true
+        allow-no-subscriptions: true
 
     - name: Download artifact
       uses: actions/download-artifact@v4
@@ -69,6 +69,7 @@ jobs:
         app_location: "wwwroot"
         output_location: ""
         skip_api_build: true
+        deployment_action: 'upload'
 
   e2e:
     needs: deploy
@@ -80,10 +81,10 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Install Playwright
-      uses: microsoft/playwright-github-action@v1
+      uses: npx playwright install --with-deps
 
     - name: Install node dependencies
-      run: npm ci --prefix tests/e2e
+      run: npm install --prefix tests/e2e
 
     - name: Run smoke tests
       run: npx playwright test --project=chromium --reporter=line
